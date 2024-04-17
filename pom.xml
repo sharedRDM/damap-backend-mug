@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>at.tugraz</groupId>
   <artifactId>damap-be</artifactId>
-  <version>3.0.1</version>
+  <version>3.0.2</version>
   <properties>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <maven.compiler.target>11</maven.compiler.target>
@@ -46,7 +46,7 @@
       <groupId>at.ac.tuwien</groupId>
       <artifactId>damap-backend</artifactId>
       <type>jar</type>
-      <version>3.0.1</version>
+      <version>3.0.2</version>
     </dependency>
     <!-- Test -->
     <dependency>
