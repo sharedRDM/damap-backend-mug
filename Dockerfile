@@ -32,7 +32,7 @@ VOLUME ["/home/app/.m2/repository"]
 RUN mvn -Duser.home=$BUILD_HOME -B package -DskipTests -Dquarkus.profile=${BUILD_PROFILE}
 
 # Create a second stage container which will only contain the runtime binaries without build dependencies
-FROM rockylinux:8.5 as runner
+FROM rockylinux:8.5 AS runner
 
 ARG JAVA_PACKAGE=java-17-openjdk-headless
 ARG RUN_JAVA_VERSION=1.3.8
