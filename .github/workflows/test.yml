@@ -1,0 +1,29 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason"
+        required: false
+        default: "Manual trigger"
+
+jobs:
+  maven-build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Maven Action
+        uses: s4u/setup-maven-action@v1.12.0
+        with:
+          java-version: "17"
+          maven-version: "3.9.5"
+
+      - name: Install with Maven
+        run: mvn -B clean install
