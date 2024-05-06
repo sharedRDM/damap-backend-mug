@@ -1,5 +1,6 @@
 package at.medunigraz.damap.rest.persons;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -10,6 +11,7 @@ import at.medunigraz.api.rest.base.models.MUGSearchResult;
 import at.medunigraz.api.rest.base.services.MUGAPIServiceBase;
 import at.medunigraz.damap.rest.dmp.domain.MUGPerson;
 
+@ApplicationScoped
 @RegisterRestClient(configKey = "rest.persons")
 public interface MUGPersonRestService extends MUGAPIServiceBase<MUGPerson> {
 
