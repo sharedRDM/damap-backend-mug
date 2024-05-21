@@ -16,6 +16,7 @@ public interface MUGProjectRestService extends MUGAPIServiceBase<MUGProject> {
     @GET
     @Path("")
     @ClientHeaderParam(name = "accept", value = "application/json")
+    // TODO: Can not filter for title yet.
     MUGSearchResult<MUGProject> search(@QueryParam("title__contains") String title, @QueryParam("offset") int offset,
             @QueryParam("limit") int limit);
 }

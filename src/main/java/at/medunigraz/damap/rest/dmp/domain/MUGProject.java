@@ -6,6 +6,9 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
 
 import lombok.Data;
 
@@ -13,15 +16,24 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MUGProject {
     @Size(max = 255)
-    private String identifier;
-    @Size(max = 4000)
-    private String description;
-    @Size(max = 255)
-    private String name;
+    private String id;
 
+    @JsonProperty(value = "abstract")
+    @JsonSetter(nulls = Nulls.AS_EMPTY)
+    private MultiLanguageEntry description;
+
+    @JsonProperty(value = "title")
+    @JsonSetter(nulls = Nulls.AS_EMPTY)
+    private MultiLanguageEntry name;
+
+    @JsonProperty(value = "short")
+    private String acronym;
+
+    @JsonProperty(value = "begin_effective")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private Date startDate;
 
+    @JsonProperty(value = "end_effective")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private Date endDate;
 }

@@ -58,7 +58,11 @@ public class MUGProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectDO read(String id, MultivaluedMap<String, String> queryParams) {
-        var project = projectRestService.read(id);
+        return this.read(id, queryParams, null);
+    }
+
+    public ProjectDO read(String id, MultivaluedMap<String, String> queryParams, List<String> expand) {
+        var project = projectRestService.read(id, expand);
         return MUGProjectDOMapper.mapEntityToDO(project, new ProjectDO());
     }
 
