@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.not;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -54,7 +55,8 @@ class PersonResourceTest {
 
         Mockito.when(securityService.getUserId()).thenReturn("012345");
         Mockito.when(securityService.getUserName()).thenReturn("testUser");
-        Mockito.when(mockPersonRestService.search(anyString(), anyInt(), anyInt())).thenReturn(mockSearchResult);
+        Mockito.when(mockPersonRestService.search(anyString(), anyInt(), anyInt(), nullable(List.class)))
+                .thenReturn(mockSearchResult);
     }
 
     @Test
@@ -67,7 +69,7 @@ class PersonResourceTest {
                 .statusCode(200)
                 .body("items.size", not(0));
 
-        verify(mockPersonRestService, times(1)).search(anyString(), anyInt(), anyInt());
+        verify(mockPersonRestService, times(1)).search(anyString(), anyInt(), anyInt(), nullable(List.class));
         verify(orcidPersonServiceImpl, times(0)).search(any());
     }
 }
