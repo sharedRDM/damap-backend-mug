@@ -20,7 +20,7 @@ damap:
   repositories:
     # Zenodo, Open Science Framework, DRYAD, Mendeley Data
     recommendation: ['r3d100010468', 'r3d100011137', 'r3d100000044', 'r3d100011868'] # your-recommended-repositories
-  projects-url: http://api-mock:80
+  projects-url: https://api.medunigraz.at/v1/research/project
   persons-url: https://api.medunigraz.at/v1/campusonline/person
   fits-url: http://fits-service:8080/fits
   person-services:
@@ -30,6 +30,11 @@ damap:
     - display-text: 'ORCID'
       query-value: 'ORCID'
       class-name: 'at.ac.tuwien.damap.rest.persons.orcid.ORCIDPersonServiceImpl'
+  
+  mug:
+    api:
+      auth:
+        token: "" # set to your auth token (e.g. `Token: a-token`)
 
 # general config settings
 quarkus:

@@ -28,7 +28,7 @@ public class MUGPersonServiceImpl implements PersonService {
 
     @Override
     public ContributorDO read(String id, MultivaluedMap<String, String> queryParams) {
-        MUGPerson contributor = restService.read(id);
+        MUGPerson contributor = restService.read(id, null);
 
         return MUGPersonDOMapper.mapEntityToDO(contributor, new ContributorDO());
     }
@@ -39,7 +39,7 @@ public class MUGPersonServiceImpl implements PersonService {
         int limit = s.getPagination().getPerPage();
         int offset = ((s.getPagination().getPage() < 1 ? 1 : s.getPagination().getPage()) - 1) * limit;
 
-        MUGSearchResult<MUGPerson> people = restService.search(s.getQuery(), offset, limit);
+        MUGSearchResult<MUGPerson> people = restService.search(s.getQuery(), offset, limit, null);
 
         List<ContributorDO> contributors = people.getResults().stream()
                 .map(c -> MUGPersonDOMapper.mapEntityToDO(c, new ContributorDO()))
