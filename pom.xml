@@ -4,9 +4,9 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>at.tugraz</groupId>
+  <groupId>at.medunigraz</groupId>
   <artifactId>damap-be</artifactId>
-  <version>3.0.2</version>
+  <version>0.1.0-beta.1</version>
   <properties>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <maven.compiler.target>11</maven.compiler.target>
