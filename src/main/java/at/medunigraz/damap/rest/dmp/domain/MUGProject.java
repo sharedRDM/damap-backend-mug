@@ -1,6 +1,7 @@
 package at.medunigraz.damap.rest.dmp.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.Size;
 
@@ -36,4 +37,9 @@ public class MUGProject {
     @JsonProperty(value = "end_effective")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private Date endDate;
+
+    // List of person IDs with prefix and suffix. Format:
+    // "<organizationID>-<personID>-<projectRoleID>"
+    @JsonSetter(nulls = Nulls.AS_EMPTY)
+    private List<String> persons;
 }
