@@ -1,5 +1,6 @@
 package at.medunigraz.damap.rest.projects;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +40,7 @@ public class MUGProjectServiceImpl implements ProjectService {
         int offset = ((s.getPagination().getPage() < 1 ? 1 : s.getPagination().getPage()) - 1) * limit;
 
         try {
-            var mugProjects = projectRestService.search(s.getQuery(), offset, limit);
+            var mugProjects = projectRestService.search(s.getQuery(), new Date().toInstant(), offset, limit);
 
             projects = mugProjects.getResults().stream().map(p -> MUGProjectDOMapper.mapEntityToDO(p, new ProjectDO()))
                     .collect(Collectors.toList());
