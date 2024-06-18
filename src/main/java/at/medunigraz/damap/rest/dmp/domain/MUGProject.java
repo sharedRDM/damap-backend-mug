@@ -42,4 +42,6 @@ public class MUGProject {
     // "<organizationID>-<personID>-<projectRoleID>"
     @JsonSetter(nulls = Nulls.AS_EMPTY)
     private List<String> persons;
+
+    private String manager;
 }

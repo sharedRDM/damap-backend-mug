@@ -17,7 +17,6 @@ import at.ac.tuwien.damap.rest.dmp.domain.ContributorDO;
 import at.ac.tuwien.damap.rest.dmp.domain.ProjectDO;
 import at.ac.tuwien.damap.rest.projects.ProjectService;
 import at.ac.tuwien.damap.rest.projects.ProjectSupplementDO;
-import at.medunigraz.damap.rest.dmp.domain.MUGPerson;
 import at.medunigraz.damap.rest.dmp.domain.MUGProject;
 import at.medunigraz.damap.rest.dmp.mapper.MUGPersonDOMapper;
 import at.medunigraz.damap.rest.dmp.mapper.MUGProjectDOMapper;
@@ -70,8 +69,6 @@ public class MUGProjectServiceImpl implements ProjectService {
         var persons = Uni.join().all(unis.collect(Collectors.toList())).andCollectFailures()
                 .await().atMost(Duration.ofSeconds(10));
 
-        log.info(persons);
-
         return persons.stream().map(mugPerson -> MUGPersonDOMapper.mapEntityToDO(mugPerson, new ContributorDO()))
                 .collect(Collectors.toList());
     }
@@ -98,6 +95,11 @@ public class MUGProjectServiceImpl implements ProjectService {
 
     @Override
     public ContributorDO getProjectLeader(String projectId) {
-        return null;
+        MUGProject project = projectRestService.read(projectId, null);
+        if (project.getManager() == null) {
+            return null;
+        }
+
+        return MUGPersonDOMapper.mapEntityToDO(personRestService.read(project.getManager(), null), new ContributorDO());
     }
 }
