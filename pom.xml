@@ -1,33 +1,38 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>at.tugraz</groupId>
-  <artifactId>damap-be</artifactId>
-  <version>3.0.2</version>
+  <artifactId>damap</artifactId>
+  <version>0.0.0</version>
+
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>A tool for machine actionable DMPs.</description>
+  <url>https://github.com/sharedRDM/damap-backend</url>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
+
   <properties>
-    <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.source>11</maven.compiler.source>
+    <surefire-plugin.version>3.2.3</surefire-plugin.version>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.parameters>true</maven.compiler.parameters>
-    <compiler-plugin.version>3.8.1</compiler-plugin.version>
-    <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
+    <compiler-plugin.version>3.12.1</compiler-plugin.version>
+    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.16.2.Final</quarkus.platform.version>
+    <quarkus.platform.version>3.11.1</quarkus.platform.version>
+    <spotless.version>2.44.0.BETA1</spotless.version>
   </properties>
-
-  <!-- TODO: remove when damap-backend base image is available via maven -->
-  <repositories>
-    <repository>
-      <id>local-repo</id>
-      <name>Local Repository for Additional Libraries</name>
-      <url>file://${project.basedir}/lib</url>
-    </repository>
-  </repositories>
 
   <dependencyManagement>
     <dependencies>
@@ -40,13 +45,13 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <dependencies>
     <!-- Base image -->
     <dependency>
-      <groupId>at.ac.tuwien</groupId>
-      <artifactId>damap-backend</artifactId>
-      <type>jar</type>
-      <version>3.0.2</version>
+      <groupId>org.damap</groupId>
+      <artifactId>base</artifactId>
+      <version>4.0.2</version>
     </dependency>
     <!-- Test -->
     <dependency>
@@ -99,11 +104,11 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client</artifactId>
+      <artifactId>quarkus-resteasy-client</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client-jaxb</artifactId>
+      <artifactId>quarkus-resteasy-client-jaxb</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -146,7 +151,6 @@
     <dependency>
       <groupId>org.yaml</groupId>
       <artifactId>snakeyaml</artifactId>
-      <version>1.32</version>
     </dependency>
     <!-- Health -->
     <dependency>
@@ -183,6 +187,10 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-cache</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-openapi</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -202,9 +210,43 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>${spotless.version}</version>
+        <configuration>
+          <java>
+            <!-- These are the defaults, you can override if you want -->
+            <includes>
+              <include>src/main/java/**/*.java</include>
+              <include>src/test/java/**/*.java</include>
+            </includes>
+
+            <!-- Cleanthat will refactor your code, but it may break your style: apply it before
+            your formatter -->
+            <cleanthat />
+            <googleJavaFormat></googleJavaFormat>
+            <importOrder /> <!-- standard import order -->
+            <removeUnusedImports /> <!-- self-explanatory -->
+            <formatAnnotations />  <!-- fixes formatting of type annotations -->
+          </java>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>verify</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>4.28.0</version>
+      </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>native</id>
@@ -239,7 +281,8 @@
         </plugins>
       </build>
       <properties>
-        <quarkus.package.type>native</quarkus.package.type>
+        <quarkus.native.enabled>true</quarkus.native.enabled>
+        <quarkus.package.jar.enabled>false</quarkus.package.jar.enabled>
       </properties>
     </profile>
   </profiles>
