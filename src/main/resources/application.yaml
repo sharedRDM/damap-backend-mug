@@ -29,7 +29,7 @@ damap:
       class-name: 'at.medunigraz.damap.rest.persons.MUGPersonServiceImpl'
     - display-text: 'ORCID'
       query-value: 'ORCID'
-      class-name: 'at.ac.tuwien.damap.rest.persons.orcid.ORCIDPersonServiceImpl'
+      class-name: 'org.damap.base.rest.persons.orcid.ORCIDPersonServiceImpl'
   
   mug:
     api:
@@ -75,7 +75,7 @@ quarkus:
 
   liquibase:
     migrate-at-start: true
-    change-log: at/ac/tuwien/damap/db/changeLog-root.yaml
+    change-log: org/damap/base/db/changeLog-root.yaml
 
   rest-client:
     follow-redirects: true
@@ -86,7 +86,7 @@ rest:
   fits/mp-rest/url: ${damap.fits-url}
   r3data:
     repositories/mp-rest/url: https://www.re3data.org/api
-    repositories/mp-rest/scope: javax.inject.Singleton
+    repositories/mp-rest/scope: jakarta.inject.Singleton
   openaire/mp-rest/url: http://api.openaire.eu/search/
   orcid:
     search/mp-rest/url: https://pub.orcid.org

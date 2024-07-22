@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class MUGSearchResult<T> {
-    private int count;
-    private String next;
-    private String previous;
-    private List<T> results;
+  private int count;
+  private String next;
+  private String previous;
+  private List<T> results;
 }
