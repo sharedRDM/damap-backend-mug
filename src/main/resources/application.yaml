@@ -75,7 +75,7 @@ quarkus:
 
   liquibase:
     migrate-at-start: true
-    change-log: org/damap/base/db/changeLog-root.yaml
+    change-log: at/medunigraz/damap/db/mainChangeLog.yaml
 
   rest-client:
     follow-redirects: true
