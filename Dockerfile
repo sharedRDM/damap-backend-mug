@@ -25,8 +25,6 @@ WORKDIR $BUILD_HOME
 COPY src ./src
 COPY ./pom.xml .
 
-# #TODO: Remove when damap-backend gets published on a maven repo
-COPY lib ./lib
 
 VOLUME ["/home/app/.m2/repository"]
 RUN mvn -Duser.home=$BUILD_HOME -B package -DskipTests -Dquarkus.profile=${BUILD_PROFILE}
