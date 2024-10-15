@@ -7,7 +7,7 @@
 
   <groupId>at.medunigraz</groupId>
   <artifactId>damap-be</artifactId>
-  <version>0.3.0-beta.1</version>
+  <version>0.3.1-beta.1</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>A tool for machine actionable DMPs.</description>
@@ -51,7 +51,7 @@
     <dependency>
       <groupId>org.damap</groupId>
       <artifactId>base</artifactId>
-      <version>4.1.0</version>
+      <version>4.2.0</version>
     </dependency>
     <!-- Test -->
     <dependency>
@@ -62,6 +62,11 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-junit5-component</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -96,36 +101,32 @@
     <!-- Rest -->
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-multipart</artifactId>
+      <artifactId>quarkus-rest</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy</artifactId>
+      <artifactId>quarkus-rest-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-client</artifactId>
+      <artifactId>quarkus-rest-client</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-client-jaxb</artifactId>
+      <artifactId>quarkus-rest-client-jaxb</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-jaxb</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-jackson</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-jaxb</artifactId>
+      <artifactId>quarkus-rest-client-jackson</artifactId>
     </dependency>
     <!-- Authentication -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-oidc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-jwt</artifactId>
     </dependency>
     <!-- Database -->
     <dependency>
@@ -210,7 +211,29 @@
           </execution>
         </executions>
       </plugin>
+     <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${compiler-plugin.version}</version>
+        <configuration>
+          <parameters>${maven.compiler.parameters}</parameters>
+        </configuration>
+      </plugin>
       <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire-plugin.version}</version>
+        <configuration>
+          <systemProperties>
+            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            <maven.home>${maven.home}</maven.home>
+          </systemProperties>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!--
+        These are plugins which we do not nessesary need it: 
+        maven-compiler-plugin: org.codehaus.mojo: generates java classes which we use from base (xsd)
+        maven-deploy-plugin: we do not call deploy in any pipelin jsonschema2pojo-maven-plugin: generates java classes which we use from base (json) 
+        -->
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
         <version>${spotless.version}</version>
@@ -221,9 +244,10 @@
               <include>src/main/java/**/*.java</include>
               <include>src/test/java/**/*.java</include>
             </includes>
-
-            <!-- Cleanthat will refactor your code, but it may break your style: apply it before
-            your formatter -->
+            <!-- 
+            Cleanthat will refactor your code, but it may break your style: apply it before
+            your formatter 
+            -->
             <cleanthat />
             <googleJavaFormat></googleJavaFormat>
             <importOrder /> <!-- standard import order -->
@@ -246,6 +270,7 @@
         <version>4.28.0</version>
       </plugin>
     </plugins>
+    <!-- jandex-maven-plugin: generates indexes of exported classes of the base-->
   </build>
   <profiles>
     <profile>
@@ -285,5 +310,9 @@
         <quarkus.package.jar.enabled>false</quarkus.package.jar.enabled>
       </properties>
     </profile>
+    <!-- 
+    sonar: usecase: if you call maven with this profile, sonarsource we be used: 
+    deploy-mvn-repository: is used only for dep of the base 
+    -->
   </profiles>
 </project>
