@@ -74,5 +74,5 @@ The OpenAPI documentation is automatically generated for the backend. Additional
 
 ## MUG API
 
-For the Medical University of Graz (MUG) environment, the relevant API information can be found in the [application.yaml](https://github.com/sharedRDM/damap-backend/blob/4fe538bddda793ebdfd7a883ba0cd3764e32ef79/src/main/resources/application.yaml#L23-L24) file.
-MUG also uses an authentication token in their configuration for the API, which can be found [here](https://github.com/sharedRDM/damap-backend/blob/4fe538bddda793ebdfd7a883ba0cd3764e32ef79/src/main/resources/application.yaml#L34-L37).
+For the Medical University of Graz (MUG) environment, the relevant API information can be found in the [application.yaml](https://github.com/sharedRDM/damap-backend-mug/blob/4fe538bddda793ebdfd7a883ba0cd3764e32ef79/src/main/resources/application.yaml#L23-L24) file.
+MUG also uses an authentication token in their configuration for the API, which can be found [here](https://github.com/sharedRDM/damap-backend-mug/blob/4fe538bddda793ebdfd7a883ba0cd3764e32ef79/src/main/resources/application.yaml#L34-L37).

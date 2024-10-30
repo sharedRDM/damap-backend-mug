@@ -8,10 +8,10 @@ FROM maven:3.9.5-eclipse-temurin-17-alpine as builder
 LABEL maintainer="rdmteam@tugraz.at" \
         org.label-schema.name="DAMAP-backend" \
         org.label-schema.description="DAMAP is a tool that aims to facilitate the creation of data management plans (DMPs) for researchers." \
-        org.label-schema.usage="https://github.com/sharedRDM/damap-backend/tree/main/doc" \
+        org.label-schema.usage="https://github.com/sharedRDM/damap-backend-mug/tree/main/doc" \
         org.label-schema.vendor="Technische Universität Graz" \
-        org.label-schema.url="https://github.com/sharedRDM/damap-backend" \
-        org.label-schema.vcs-url="https://github.com/sharedRDM/damap-backend" \
+        org.label-schema.url="https://github.com/sharedRDM/damap-backend-mug" \
+        org.label-schema.vcs-url="https://github.com/sharedRDM/damap-backend-mug" \
         org.label-schema.schema-version="1.0" \
         org.label-schema.docker.cmd="docker run -d -p 8080:8080 damap"
 
