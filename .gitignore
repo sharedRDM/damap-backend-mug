@@ -37,3 +37,5 @@ release.properties
 
 # Local environment
 .env
+java.env
+use-java17.sh
