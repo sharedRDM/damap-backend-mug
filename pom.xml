@@ -7,7 +7,7 @@
 
   <groupId>at.medunigraz</groupId>
   <artifactId>damap-be</artifactId>
-  <version>0.3.1-beta.1</version>
+  <version>0.4.0-beta</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>A tool for machine actionable DMPs.</description>
@@ -21,7 +21,7 @@
   </licenses>
 
   <properties>
-    <surefire-plugin.version>3.2.3</surefire-plugin.version>
+   <surefire-plugin.version>3.2.3</surefire-plugin.version>
     <maven.compiler.target>17</maven.compiler.target>
     <maven.compiler.source>17</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -46,12 +46,12 @@
     </dependencies>
   </dependencyManagement>
 
-  <dependencies>
+ <dependencies>
     <!-- Base image -->
     <dependency>
       <groupId>org.damap</groupId>
       <artifactId>base</artifactId>
-      <version>4.2.0</version>
+      <version>4.3.1</version>
     </dependency>
     <!-- Test -->
     <dependency>
@@ -167,7 +167,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.24</version>
+      <version>1.18.32</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

@@ -23,6 +23,7 @@ damap:
   projects-url: https://api-test.medunigraz.at/v1/research/project
   persons-url: https://api-test.medunigraz.at/v1/campusonline/person
   fits-url: http://fits-service:8080/fits
+  gotenberg-url: ${DAMAP_GOTENBERG_URL}
   person-services:
     - display-text: 'University'
       query-value: 'UNIVERSITY'
@@ -104,6 +105,7 @@ rest:
     projects-url: http://localhost:8091
     persons-url: http://localhost:8091
     fits-url: http://localhost:8089/fits
+    gotenberg-url: http://localhost:3000
 
 "%oracle":
   quarkus:
