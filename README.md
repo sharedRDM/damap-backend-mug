@@ -27,10 +27,4 @@ The DMP Tool MUG can be deployed using several methods. The recommended approach
 
 For customising the backend to integrate with MUG's institutional systems, refer to the [CUSTOMISING.md](CUSTOMISING.md) file.
 
-## Authors
-
-- [David Eckhard](https://github.com/rekt-hard)
-- [Laura Thaci](https://github.com/lpandath)
-- [Mojib Wali](https://github.com/mb-wali)
-
 
